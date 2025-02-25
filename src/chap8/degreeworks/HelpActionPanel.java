@@ -2,8 +2,10 @@ package chap8.degreeworks;
 
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import chap8.courses.Course;
 import chap8.courses.Section;
@@ -22,6 +24,27 @@ public class HelpActionPanel extends ActionPanel {
         JLabel label = new JLabel(htmlWelcome);
         panel.add(label);
         return panel;
+    }
+
+    @Override
+    protected String getTitle() {
+        // TODO Auto-generated method stub
+        return "HELP ACTION PANEL";
+    }
+
+    @Override
+    protected JLabel[] getLabels() {
+        return new JLabel[] {};
+    }
+
+    @Override
+    protected JTextField[] getTextFields() {
+        return new JTextField[] {};
+    }
+
+    @Override
+    protected JButton[] getButtons() {
+        return new JButton[] {};
     }
 
 }

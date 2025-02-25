@@ -31,8 +31,8 @@ public class Main {
     protected User currentuser; // this is the user who logged in
 
     // our main UI components in the top area
-    protected CoursesActionPanel coursesPanel;
-    protected SectionsActionPanel sectionsPanel;
+    protected CoursesActionPanel coursesPanel; 
+    protected SectionsActionPanel sectionsPanel; 
     protected TermsActionPanel termsPanel;
     protected HelpActionPanel helpPanel;
     protected CatalogPanel catalogPanel;

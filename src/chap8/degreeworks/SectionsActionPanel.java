@@ -5,8 +5,10 @@ import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import chap8.courses.Course;
 import chap8.courses.Section;
@@ -21,22 +23,25 @@ public class SectionsActionPanel extends ActionPanel {
     public void loadSection(Section s) {
     }
 
+        @Override
+    protected String getTitle() {
+        // TODO Auto-generated method stub
+        return "SECTIONS ACTION PANEL";
+    }
+
     @Override
-    protected JPanel setupGUI() {
-        JPanel panel = new JPanel();
-        
-        JPanel northPanel = new JPanel();
-        northPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); 
-        northPanel.add(new JLabel("SECTIONS ACTION PANEL"), BorderLayout.NORTH);
-        panel.add(northPanel, BorderLayout.NORTH);
+    protected JLabel[] getLabels() {
+        return new JLabel[] {};
+    }
 
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new GridBagLayout());
+    @Override
+    protected JTextField[] getTextFields() {
+        return new JTextField[] {};
+    }
 
-        // fill in the rest of your code here to add all the necessary components to the centerPanel
-
-        panel.add(centerPanel, BorderLayout.CENTER);
-        return panel;
+    @Override
+    protected JButton[] getButtons() {
+        return new JButton[] {};
     }
 
 }

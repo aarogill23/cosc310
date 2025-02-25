@@ -5,15 +5,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
 import chap8.courses.Course;
 import chap8.courses.Section;
@@ -25,55 +19,12 @@ public class TermsActionPanel extends ActionPanel {
     // GUI components we need to access at various times
     protected JTextField nameField;
     protected JTextField yearField;
-    protected JButton addButton;
-    protected JButton submitButton;
-    protected JButton cancelButton;
-    protected JButton updateButton;        
-    protected JButton deleteButton;
-
     public TermsActionPanel(Main main, ArrayList<User> allusers, ArrayList<Course> allcourses, ArrayList<Section> allsections, ArrayList<Term> allterms) {
         super(main, allusers, allcourses, allsections, allterms);
     }
     
     @Override
-    protected JPanel setupGUI() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        JPanel northPanel = new JPanel();
-        northPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); 
-        northPanel.add(new JLabel("TERMS ACTION PANEL"), BorderLayout.NORTH);
-        panel.add(northPanel, BorderLayout.NORTH);
-
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.EAST;
-        centerPanel.add(new JLabel("Name:"), gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        nameField = new JTextField(20);
-        centerPanel.add(nameField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.EAST;
-        centerPanel.add(new JLabel("Year:"), gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        yearField = new JTextField(20);
-        centerPanel.add(yearField, gbc);
-
-        // Now let's add a panel for all the actions buttons
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+    protected JButton[] getButtons() {
         addButton = new JButton("Add New Term");
         submitButton = new JButton("Add");
         cancelButton = new JButton("Cancel");
@@ -82,11 +33,6 @@ public class TermsActionPanel extends ActionPanel {
         deleteButton.setForeground(Color.RED); // Sets text color to red
         updateButton.setVisible(false);
         deleteButton.setVisible(false);
-        buttonPanel.add(addButton);
-        buttonPanel.add(submitButton);
-        buttonPanel.add(cancelButton);
-        buttonPanel.add(updateButton);
-        buttonPanel.add(deleteButton);
 
         // now add all the listeners for the buttons
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +85,7 @@ public class TermsActionPanel extends ActionPanel {
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Term t = main.catalogPanel.getSelectedTerm();
-                if (JOptionPane.showConfirmDialog(buttonPanel, "Are you sure you want to delete this term?" + t, "Confirmation", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this term?" + t, "Confirmation", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                     allterms.remove(t);
                     main.catalogPanel.updateAllLists();
                     nameField.setText("");
@@ -152,10 +98,7 @@ public class TermsActionPanel extends ActionPanel {
                 }
             }
         });
-
-        panel.add(centerPanel, BorderLayout.CENTER);
-        panel.add(buttonPanel, BorderLayout.SOUTH);
-        return panel;
+        return new JButton[] {addButton, submitButton, cancelButton, updateButton, deleteButton};
     }
 
     public void loadTerm(Term t) {
@@ -166,6 +109,26 @@ public class TermsActionPanel extends ActionPanel {
         deleteButton.setVisible(true);
         this.nameField.setText(t.getName());
         this.yearField.setText(t.getYear());
+    }
+
+    @Override
+    protected String getTitle() {
+        return "TERMS ACTION PANEL";
+    }
+
+    @Override
+    protected JLabel[] getLabels() {
+        return new JLabel[] {
+            new JLabel("Name:"),
+            new JLabel("Year")
+        };
+    }
+
+    @Override
+    protected JTextField[] getTextFields() {
+        nameField = new JTextField();
+        yearField = new JTextField();
+        return new JTextField[] {nameField, yearField};
     }
 
 }
