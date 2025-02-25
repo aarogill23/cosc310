@@ -126,8 +126,8 @@ public class TermsActionPanel extends ActionPanel {
 
     @Override
     protected JTextField[] getTextFields() {
-        nameField = new JTextField();
-        yearField = new JTextField();
+        nameField = new JTextField(15);
+        yearField = new JTextField(15);
         return new JTextField[] {nameField, yearField};
     }
 
