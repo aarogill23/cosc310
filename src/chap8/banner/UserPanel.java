@@ -24,7 +24,7 @@ public class UserPanel extends JPanel {
     private JComboBox<String> typeDropdown;
     private JButton addButton;
     private JButton updateButton;
-    // DECLARE A DELETE BUTTON HERE
+    private JButton deleteButton;
     private JButton saveButton;
     private JButton loadButton;
     private JButton sortButton;
@@ -121,12 +121,13 @@ public class UserPanel extends JPanel {
         addButton = new JButton("Add User");
         updateButton = new JButton("Update User");
         updateButton.setVisible(false);
-        // INITIALIZE AND HIDE THE DELETE BUTTON HERE
+        deleteButton = new JButton("Delete User");
+        deleteButton.setVisible(false);
         saveButton = new JButton("Save Users");
         loadButton = new JButton("Load Users");
         buttonPanel.add(addButton, gbc);
         buttonPanel.add(updateButton, gbc);
-        // ADD THE HIDDEN DELETE BUTTON TO THE PANEL
+        buttonPanel.add(deleteButton, gbc);
         buttonPanel.add(saveButton, gbc);
         buttonPanel.add(loadButton, gbc);
         add(buttonPanel, gbc);
@@ -142,7 +143,14 @@ public class UserPanel extends JPanel {
                 updateUser();
             }
         });
-        // REGISTER A HANDLER FOR THE DELETE BUTTON HERE
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                deleteUser(); 
+            }
+        });
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -199,15 +207,16 @@ public class UserPanel extends JPanel {
         String type = (String) typeDropdown.getSelectedItem();
         String username = usernameBox.getText();
         String password = passwordBox.getText();
+        String id = idBox.getText();
         if (!name.isEmpty() && type != null) {
             if (type.equals("Student")) {
-                allusers.add(new Student(name, type, username, password));
+                allusers.add(new Student(name, id, username, password));
             } else if (type.equals("Faculty")) {
-                allusers.add(new Faculty(name, type, username, password));
+                allusers.add(new Faculty(name, id, username, password));
             } else if (type.equals("Staff")) {
-                allusers.add(new Staff(name, type, username, password));
+                allusers.add(new Staff(name, id, username, password));
             } else if (type.equals("Admin")) {
-                allusers.add(new Admin(name, type, username, password));
+                allusers.add(new Admin(name, id, username, password));
             }
             nameBox.setText("");
             idBox.setText("");
@@ -225,7 +234,7 @@ public class UserPanel extends JPanel {
         this.selectedUser = u;
         addButton.setVisible(false);
         updateButton.setVisible(true);
-        // MAKE THE DELETE BUTTON VISIBLE
+        deleteButton.setVisible(true);
         nameBox.setText(u.getName());
         idBox.setText(u.getId());
         // finish loading the boxes        
@@ -245,7 +254,7 @@ public class UserPanel extends JPanel {
         // restore the UI to prepare it for adding a new user
         addButton.setVisible(true);
         updateButton.setVisible(false);
-        // HIDE THE DELETE BUTTON TOO!
+        deleteButton.setVisible(false);
 
         nameBox.setText("");
         idBox.setText("");
@@ -254,9 +263,19 @@ public class UserPanel extends JPanel {
         
      }
 
-     // finish this deleteUser method AND call it from the delete button's action listener which you also need to add alongside the other action listeners
+    // Helper method to delete user
      public void deleteUser() {
-        // add your code here
-        // look at updateUser to get an idea of all the kinds of things you need to do
+
+        allusers.remove(selectedUser);
+
+        userListPanel.updateUserList(allusers);
+        addButton.setVisible(true);
+        updateButton.setVisible(false);
+        deleteButton.setVisible(false);
+
+        nameBox.setText("");
+        idBox.setText("");
+        usernameBox.setText("");
+        passwordBox.setText("");
       }
 }
