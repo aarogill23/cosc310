@@ -28,7 +28,6 @@ public class HelpActionPanel extends ActionPanel {
 
     @Override
     protected String getTitle() {
-        // TODO Auto-generated method stub
         return "HELP ACTION PANEL";
     }
 
