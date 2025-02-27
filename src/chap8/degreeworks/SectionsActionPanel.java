@@ -15,6 +15,9 @@ import chap8.users.User;
 public class SectionsActionPanel extends ActionPanel {
     // Declare your GUI Components here (JTextFields and your JList and DefaultListModel) as protected so they can be accessed by the loadSection method
     // See CoursesActionPanel for an example
+
+    // Data reference to the current section ... also keep in mind you are inheriting allsections here and can access it directly in your listeners when it is time to add/update/delete a section
+    // But unlike the other ActionPanels, you will also need a reference to the current section so you can populate the textfields and JList with the data from the section AND enroll/unenroll students
     protected Section currentSection;
 
     public SectionsActionPanel(Main main, ArrayList<User> allusers, ArrayList<Course> allcourses, ArrayList<Section> allsections, ArrayList<Term> allterms) {
@@ -59,7 +62,7 @@ public class SectionsActionPanel extends ActionPanel {
     @Override
     public JPanel setupGUI() {
         JPanel ourSpecializedSectionPanel = new JPanel();
-        JPanel theNormalActionPanel = super.setupGUI();
+        JPanel theNormalActionPanel = super.setupGUI(); // this will setup all the JLabels and JTextFields for you
         JPanel theRosterPanel = new JPanel();
         // add all the new GUI components to theRosterPanel
         // including the two new buttons AND their listeners
