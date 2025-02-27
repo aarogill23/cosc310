@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import chap8.courses.Course;
@@ -14,6 +15,7 @@ import chap8.users.User;
 public class SectionsActionPanel extends ActionPanel {
     // Declare your GUI Components here (JTextFields and your JList and DefaultListModel) as protected so they can be accessed by the loadSection method
     // See CoursesActionPanel for an example
+    protected Section currentSection;
 
     public SectionsActionPanel(Main main, ArrayList<User> allusers, ArrayList<Course> allcourses, ArrayList<Section> allsections, ArrayList<Term> allterms) {
         super(main, allusers, allcourses, allsections, allterms);
@@ -22,6 +24,7 @@ public class SectionsActionPanel extends ActionPanel {
     // lots of work to do here as you need to not only populate the textfields with data for the loaded section but ALSO populate the JList  ... see CourseActionPanel for an example with the textfields and...
     // SEE CatalogPanel for an example of how to populate the JList
     public void loadSection(Section s) {
+        currentSection = s;
         // populate the textfields with the data from the Section object
 
         // populate the JList with the classlist from the Section object
@@ -51,6 +54,21 @@ public class SectionsActionPanel extends ActionPanel {
         // CREATE YOUR JButton OBJECTS BEFORE THE ARRAY INITIALIZER BELOW (SEE EXAMPLES IN CoursesActionPanel and TermsActionPanel)
         // Then simply list the references to the buttons in the array initializer
         return new JButton[] {};
+    }
+    
+    @Override
+    public JPanel setupGUI() {
+        JPanel ourSpecializedSectionPanel = new JPanel();
+        JPanel theNormalActionPanel = super.setupGUI();
+        JPanel theRosterPanel = new JPanel();
+        // add all the new GUI components to theRosterPanel
+        // including the two new buttons AND their listeners
+                
+        // << PUT A LOT OF CODE >>
+
+        //
+        ourSpecializedSectionPanel.add(theNormalActionPanel, theRosterPanel);
+        return ourSpecializedSectionPanel;
     }
 
 }

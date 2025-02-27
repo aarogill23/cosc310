@@ -165,9 +165,9 @@ public class Main {
         }
     }
 
-    protected ArrayList<Student> getSeveralRandomStudents(ArrayList<Student> allStudents, int count) {
+    protected ArrayList<User> getSeveralRandomStudents(ArrayList<User> allStudents, int count) {
         Random random = new Random();
-        ArrayList<Student> selectedStudents = new ArrayList<>();
+        ArrayList<User> selectedStudents = new ArrayList<>();
         HashSet<Integer> selectedIndexes = new HashSet<>();
 
         while (selectedIndexes.size() < count) {
@@ -183,6 +183,10 @@ public class Main {
     protected void populateData() {
         ArrayList<Faculty> facultyMembers = User.getFaculty(allusers);
         ArrayList<Student> allStudents = User.getStudents(allusers);
+        ArrayList<User> studentUsers = new ArrayList<>();
+        for (Student s : allStudents) {
+            studentUsers.add(s);
+        }
 
         ArrayList<Term> terms = new ArrayList<>();
         String[] termNames = { "Spring", "Summer", "Fall", "Winter" };
@@ -229,7 +233,7 @@ public class Main {
             Term term = terms.get(random.nextInt(terms.size()));
             Course course = courses.get(random.nextInt(courses.size()));
             Faculty instructor = facultyMembers.get(random.nextInt(facultyMembers.size()));
-            ArrayList<Student> enrolledStudents = getSeveralRandomStudents(allStudents, 10 + random.nextInt(6)); // 10-15
+            ArrayList<User> enrolledStudents = getSeveralRandomStudents(studentUsers, 10 + random.nextInt(6)); // 10-15
                                                                                                                  // students
             Section section = new Section(
                     term,

@@ -1,10 +1,10 @@
 package chap8.courses;
 
 public class Course {
-    protected String department;
-    protected String number;
-    protected String title; 
-    protected int credits;
+    protected String department; // e.g., COSC
+    protected String number; // e.g., 310
+    protected String title; // e.g., Advanced Progamming Concepts
+    protected int credits; // e.g., 4
 
     public Course(String department, String number, String title, int credits) {
         this.department = department;
