@@ -1,5 +1,5 @@
 bin
 settings.json
 .vscode
-*/.DS_Store
+.DS_Store
 submissions/
