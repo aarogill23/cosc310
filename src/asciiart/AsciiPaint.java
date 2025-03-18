@@ -19,6 +19,8 @@ public class AsciiPaint {
         shapesArray[shapeCnt++] = s;
         s = new Square(5, "yellow", '+');
         shapesList.add(s);
+        Triangle t = new Triangle(9, 7, "pink", '*');
+        shapesList.add(t);
         shapesArray[shapeCnt++] = s;
 
         for (Shape shape : shapesList) {
