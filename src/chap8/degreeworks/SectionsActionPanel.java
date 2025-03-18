@@ -2,6 +2,7 @@ package chap8.degreeworks;
 
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +14,10 @@ import chap8.courses.Term;
 import chap8.users.User;
 
 public class SectionsActionPanel extends ActionPanel {
+
+    protected Main main;
+    protected DefaultListModel<String> DefaultList;
+
     // Declare your GUI Components here (JTextFields and your JList and DefaultListModel) as protected so they can be accessed by the loadSection method
     // See CoursesActionPanel for an example
 
