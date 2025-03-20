@@ -8,6 +8,5 @@ public class TreeDemo {
         airports.addChild(msp,"JFK");
         airports.addChild(msp,"ORD");
         System.out.println(airports);
-        System.out.println(airports.toString(msp, 0));
     }
 }
