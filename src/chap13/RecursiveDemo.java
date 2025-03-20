@@ -3,9 +3,9 @@ package chap13;
 public class RecursiveDemo {
 
     public static void main(String[] args) {
-        int reading = 0b00000000111110110000000000000000;
+        int reading = 0b00000000111111110000000000000000;
         int passdist = bitextractor(reading, 18, 3);
-        int passdist_r = bitextractor_r(reading, 18, 1);
+        int passdist_r = bitextractor_r(reading, 18, 3);
         System.out.println(passdist);
         System.out.println(passdist_r);
         for (int n = -1; n < 100; n++) {
@@ -24,7 +24,7 @@ public class RecursiveDemo {
         if (n == 1) {
             return extractBit(reading, pos);
         } else {
-            return (extractBit(reading, pos) << n) | bitextractor_r(reading, pos-1, n-1);
+            return (extractBit(reading, pos) << (n-1)) | bitextractor_r(reading, pos-1, n-1);
         }
     }
     private static int bitextractor(int reading, int pos, int n) {
