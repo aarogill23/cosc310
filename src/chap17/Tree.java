@@ -6,7 +6,7 @@ public class Tree<E> {
     
     protected TreeNode<E> root;
 
-    protected class TreeNode<E> {
+    protected class TreeNode<H> {
         // attributes
         protected TreeNode<E> parent;
         protected ArrayList<TreeNode<E>> children;  
@@ -62,13 +62,59 @@ public class Tree<E> {
         return nsize;
     }
 
+    /**
+     * 
+     * @param e - The data we are searching for
+     * @return  - First node containing the data if found otherwise null
+     */
+
+    public TreeNode<E> search(E e){
+        return root==null?null: search(e, root);
+    }
+
+    protected TreeNode<E> search(E e, TreeNode<E> n){
+        if(n.data.equals(e)){
+            return n;
+        }
+        else if (n.children != null) {
+            for (TreeNode<E> child : n.children) {
+                if(search(e, child) == n)
+                    return n;
+            }
+
+        }
+        return null;
+    }
+
+    public TreeNode<E> breadthSearch(E e, TreeNode<E> n){
+        if(n.data.equals(e)){
+            return n;
+        }
+
+        if (n.children != null){
+            for(TreeNode<E> child : n.children){
+                if(child.equals(e))
+                    return child;
+            }
+            for(TreeNode<E> child : n.children){
+                TreeNode<E> hit = breadthSearch(e, child);
+                if(hit != null)
+                    return hit;
+            }
+
+        }
+
+
+        return null;
+    }
+
     @Override
     public String toString() {
         return size()==0?"EMPTY":toString(root, 0);
     }
 
     public String toString(TreeNode<E> n, int indent) {
-        String spacestring = " ".repeat(indent);
+        String spacestring = "-".repeat(indent);
         String result = spacestring + n.data.toString();
         if (n.children != null) {
             for (TreeNode<E> child : n.children) {

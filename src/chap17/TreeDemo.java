@@ -6,7 +6,9 @@ public class TreeDemo {
         airports.addChild(airports.root(),"ATL");
         Tree<String>.TreeNode<String> msp = airports.addChild(airports.root(),"MSP");
         airports.addChild(msp,"JFK");
-        airports.addChild(msp,"ORD");
+        Tree<String>.TreeNode<String> ord = airports.addChild(msp, "ORD");
+        airports.addChild(ord, "TPA");
         System.out.println(airports);
+
     }
 }
