@@ -2,9 +2,11 @@ package ad;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class HelloDB {
 
@@ -12,16 +14,29 @@ public class HelloDB {
     static String QUERY = "select * from websites";
 
     public static void main(String[] args) {
-            // Open a connection
-        try(Connection conn = DriverManager.getConnection(DB_URL);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(QUERY);) {
+        Scanner keyin = new Scanner(System.in);
+        System.out.print("Username: ");
+        String username = keyin.nextLine();
+        System.out.print("Password: ");
+        String password = keyin.nextLine();
+        String loginQuery = "SELECT * FROM users LEFT JOIN roles ON role_id=roles.id WHERE username=? AND password=crypt(?, password)";
+        // String roleQuery = "SELECT * FROM roles WHERE id = ?";
+
+        // Open a connection
+        try {            
+            Connection conn = DriverManager.getConnection(DB_URL);
+            PreparedStatement stmt = conn.prepareStatement(loginQuery);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
             // Extract data from result set
             while (rs.next()) {
                 // Retrieve by column name
-                System.out.print("ID: " + rs.getInt("id"));
-                System.out.println(", domain: " + rs.getString("domain"));
+                // Retrieve by column name
+                String teamname = rs.getString("name");
+                System.out.println("Welcome back " + username + ". Glad to you have part of our " + teamname + " team.");
             }
+    
         } catch (SQLException e) {
             e.printStackTrace();
         } 
