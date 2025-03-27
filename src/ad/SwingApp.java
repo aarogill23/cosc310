@@ -8,8 +8,6 @@ public class SwingApp {
 
     // JDBC connection settings
     static String DB_URL = "jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres?user=postgres.uzfqtmeirzyioxrfjniw&password=Hjxbc4hiHc8u9Jjq";
-//    private static final String DB_USER = "your_db_user";
-//    private static final String DB_PASSWORD = "your_db_password";
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> createAndShowLoginFrame());
