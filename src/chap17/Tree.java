@@ -62,28 +62,6 @@ public class Tree<E> {
         return nsize;
     }
 
-    public TreeNode<E> breadthSearch(E e, TreeNode<E> n){
-        if(n.data.equals(e)){
-            return n;
-        }
-
-        if (n.children != null){
-            for(TreeNode<E> child : n.children){
-                if(child.equals(e))
-                    return child;
-            }
-            for(TreeNode<E> child : n.children){
-                TreeNode<E> hit = breadthSearch(e, child);
-                if(hit != null)
-                    return hit;
-            }
-
-        }
-
-
-        return null;
-    }
-
     /**
      * 
      * @param e - the data we are searching for
@@ -115,6 +93,28 @@ public class Tree<E> {
         return searchBreadth(e, bfsqueue);
     }
 
+    public TreeNode<E> breadthSearch(E e, TreeNode<E> n){
+        if(n.data.equals(e)){
+            return n;
+        }
+
+        if (n.children != null){
+            for(TreeNode<E> child : n.children){
+                if(child.equals(e))
+                    return child;
+            }
+            for(TreeNode<E> child : n.children){
+                TreeNode<E> hit = breadthSearch(e, child);
+                if(hit != null)
+                    return hit;
+            }
+
+        }
+
+
+        return null;
+    }
+
     // BFS helper, but NOT useful for API b/c how do you know what "queue" to pass in?
     protected TreeNode<E> searchBreadth(E e, ArrayList<TreeNode<E>> bfsqueue) {
         if (bfsqueue.isEmpty()) {
@@ -130,6 +130,8 @@ public class Tree<E> {
             }
         }
         return searchBreadth(e, bfsqueue);
+    
+    
     }
 
     @Override
