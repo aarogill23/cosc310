@@ -1,7 +1,6 @@
 package chap17;
 
 import java.util.ArrayList;
-
 public class Tree<E> {
     
     protected TreeNode<E> root;
@@ -21,6 +20,14 @@ public class Tree<E> {
                 this.children = new ArrayList<>();
             }
             this.children.add(newchild);
+        }
+        
+        protected int depth() {
+            if (parent==null) {
+                return 1;
+            } else {
+                return 1+parent.depth();
+            }
         }
     }
 
@@ -71,6 +78,7 @@ public class Tree<E> {
         return root==null ? null : search(e, root);
     }
 
+    // DFS helper, but also useful for API ... starting your search at a particular node
     public TreeNode<E> search(E e, TreeNode<E> n) {
         if (n.data.equals(e)) {
             return n;
@@ -142,11 +150,8 @@ public class Tree<E> {
     public String toString(TreeNode<E> n, int indent) {
         String spacestring = "-".repeat(indent);
         String result = spacestring + n.data.toString();
-        if (n.children != null) {
-            for (TreeNode<E> child : n.children) {
-            result += "\n" + toString(child, indent + 2);
-            }
-        }
+
+        // ADD YOUR RECURSIVE CALL HERE ... HINT: LOOP THROUGH THE CHILDREN AND RECURSE ON EACH ONE! ANOTHER HINT: CHECK TO MAKE SURE CHILDREN IS NOT NULL FIRST
 
         return result;
     }
