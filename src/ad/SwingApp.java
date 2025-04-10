@@ -8,6 +8,7 @@ public class SwingApp {
    // JDBC connection settings
     static String DB_URL = "jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres?user=postgres.uzfqtmeirzyioxrfjniw&password=Hjxbc4hiHc8u9Jjq";
     static Connection conn;
+    static int businesscustomer_id;
 
     public static void main(String[] args) {
         try {
@@ -65,13 +66,14 @@ public class SwingApp {
     private static String authenticateUser(String username, String password) {
         String role = null;
         // SQL query joining the users and roles tables
-        String query = "SELECT r.name " +
+        String query = "SELECT r.name, u.businesscustomer_id " +
                        "FROM users u JOIN roles r ON u.role_id = r.id " +
                        "WHERE u.username = ? AND u.password = crypt(?, u.password)";
         try {
             ResultSet rs = SQLHelper.executeQuery(conn, query, username, password);
             if (rs.next()) {
                 role = rs.getString("name");
+                businesscustomer_id = rs.getInt("businesscustomer_id");
             }
        } catch (SQLException ex) {
             ex.printStackTrace();
@@ -128,7 +130,7 @@ class AdsPanel extends JPanel {
 
         JTextArea currentAdsArea = new JTextArea("Loading...", 10, 50);
         JTextArea oldAdsArea = new JTextArea("Old ads go here...", 10, 50);
-        ResultSet rs = SQLHelper.executeQuery(SwingApp.conn, "select ads.* from ads right join adcampaigns on ad_id = ads.id where date_start is not null and now() > date_start and (date_stop is null or now() < date_stop);");
+        ResultSet rs = SQLHelper.executeQuery(SwingApp.conn, "select ads.* from ads right join adcampaigns on ad_id = ads.id where businesscustomer_id = ? and date_start is not null and now() > date_start and (date_stop is null or now() < date_stop);", SwingApp.businesscustomer_id);
         currentAdsArea.setText("");
         try {
             while (rs.next()) {
