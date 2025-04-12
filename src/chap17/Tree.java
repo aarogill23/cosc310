@@ -70,14 +70,19 @@ public class Tree<E> {
     }
 
     public long height() {       
-        // finish this!
-        return 0;
+        return root == null ? 0 : height(root);
     }
 
     // the size of the subtree rooted at n
     public long height(TreeNode<E> n) {
-        // finish this!
-        return 0;
+        if (n.children == null || n.children.isEmpty()) {
+            return 1;
+        }
+        long maxHeight = 0;
+        for (TreeNode<E> child : n.children) {
+            maxHeight = Math.max(maxHeight, height(child));
+        }
+        return 1 + maxHeight;
     }
 
     /**
