@@ -20,14 +20,14 @@ public class RecursiveDemo {
         return (number >> position) & 1;
     }
 
-    private static int bitextractor_r(int reading, int pos, int n) {
+    public static int bitextractor_r(int reading, int pos, int n) {
         if (n == 1) {
             return extractBit(reading, pos);
         } else {
             return (extractBit(reading, pos) << (n-1)) | bitextractor_r(reading, pos-1, n-1);
         }
     }
-    private static int bitextractor(int reading, int pos, int n) {
+    public static int bitextractor(int reading, int pos, int n) {
         if (pos>n-1) {
             int needsmasking = reading >> (pos-(n-1));
             int mask = 0;
