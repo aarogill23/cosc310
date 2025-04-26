@@ -70,8 +70,26 @@ public class Tree<E> {
     }
 
     public long height() {       
-        return root == null ? 0 : height(root);
+        // finish this!
+        return heightHelper(root);
     }
+
+    public long heightHelper(TreeNode<E> n) {
+        if (n.children != null) {
+            long maxchildheight = 0;
+            for (TreeNode<E> child : n.children) {
+                long childheight = heightHelper(child);
+                if (childheight > maxchildheight) {
+                    maxchildheight = childheight;
+                }
+            }
+            return 1+maxchildheight;
+        } else {
+            return 1;
+        }
+    }
+
+
 
     // the size of the subtree rooted at n
     public long height(TreeNode<E> n) {

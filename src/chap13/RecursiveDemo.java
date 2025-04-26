@@ -3,6 +3,11 @@ package chap13;
 public class RecursiveDemo {
 
     public static void main(String[] args) {
+        // informal - non-automated testing
+        int tbyte = 0b10110111;
+        int bit = extractBit(tbyte, 0);
+        System.out.println(bit);
+
         int reading = 0b00000000111111110000000000000000;
         int passdist = bitextractor(reading, 18, 3);
         int passdist_r = bitextractor_r(reading, 18, 3);
