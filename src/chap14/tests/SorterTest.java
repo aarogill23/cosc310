@@ -23,7 +23,6 @@ public class SorterTest {
         Sorter.bubbleSort(nums);
 
     assertArrayEquals(sorted, nums);
-assertFal
     }
 
     @Test
